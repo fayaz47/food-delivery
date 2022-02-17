@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 
-public interface DinosurRepository extends CrudRepository<Dinosur, UUID> {
+public interface DinosurRepository extends CrudRepository<Dinosur, UUID>, DinosurRepositoryEntityManager {
     List<Dinosur> findByNameContaining(String name);
 }

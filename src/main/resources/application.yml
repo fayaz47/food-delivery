@@ -14,7 +14,7 @@ spring.datasource.hikari.maximumPoolSize: 5
 spring.datasoource.driverClassName: org.postgresql.Driver
 spring.datasource.url: jdbc:postgresql://localhost:5432/postgres
 spring.datasource.username: postgres
-spring.datasource.password: Tagore@007
+spring.datasource.password:
 
   #drop n create table again, good for testing, comment this in production
 spring.jpa.hibernate.ddl-auto: update

@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 @RestController
 public class ChildrenController {
@@ -27,11 +33,13 @@ public class ChildrenController {
             List<Childrens> childrens = new ArrayList<Childrens>();
             childrensRepository.
             findAll().forEach(childrens::add);
+        //    List<Childrens> list = childrensRepository.findAll().stream().map(addChildrens::new).collect(Collectors.toList());
             return new ResponseEntity<>(childrens, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @PostMapping("/childrens")
     public ResponseEntity<Childrens> createTutorial(@RequestBody Childrens tutorial) {
@@ -45,5 +53,22 @@ public class ChildrenController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    public List<Childrens> addChildrens() {
+         Childrens childrens = new Childrens();
+        List<Integer> integers = Arrays.asList(1,12,433,5);
+
+        Optional<Integer> max = integers.stream().reduce( Math::max );
+
+        max.ifPresent(value -> System.out.println(value));
+        List<Integer> list =  IntStream.range(1,10).boxed().collect(Collectors.toCollection(ArrayList::new));
+        List<Long> collect = list.stream().map(Integer::longValue).collect(Collectors.toList());
+        Stream<Long> sorted = collect.stream().sorted((s1, s2) -> s1.compareTo(s2));
+        System.out.println(sorted);
+        childrens.setName("fayaz");
+         List<Childrens> childrensList = new ArrayList<Childrens>(10);
+         childrensList.add(childrens);
+        return childrensList;
     }
 }
